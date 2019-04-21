@@ -1,6 +1,6 @@
 
 // I/O settings
-String sourceImageFilename = "monalisa.jpg";
+String sourceImageFilename = "f3.jpg";
 String outputSvgFilename = "output.svg";
 
 // background settings
@@ -10,23 +10,39 @@ color backgroundColorBlue = 255;
 
 // App settings
 Boolean renderToScreen = true; // Display the result on screen? Can be problematic if source image is large
-int renderStepsPerFrame = 25; // how many steps per frame if renderToScreen = true
+int renderStepsPerFrame = 200; // how many steps per frame if renderToScreen = true
 
 // Define options for cells here
+
+
+// PRESET
+// rectangles
+
+
 public CellOptions getCellOptions()
 {
   CellOptions options = new CellOptions();
   
   // Set options for shapes in cells here:
-  options.cellShape = new CellShapeRectangle();
-  options.cellShapeTransformer = new CellShapeTransformerDarkness();
+  options.cellShape = new CellShapeText("FUNGI", "CircularStd-Book.otf", 32);
+  options.cellShapeTransformer = new CellShapeTransformerFixed();
   options.cellShapeRotator = new CellShapeRotatorFixed();
-  options.cellStyle = new CellStyleOnlyFill(new CellColorFixed());
+  options.cellStyle = new CellStyleOnlyFill(new CellColorAverage());
   
   return options;
 }
 
+
 // Define options for raster here
+
+public Raster getRaster(PImage sourceImage)
+{
+  Raster raster = new RasterDynamic(sourceImage, getCellOptions(), 5, 12, 1);
+  
+  return raster;
+}
+
+/*
 public Raster getRaster(PImage sourceImage)
 {
   Raster raster = new RasterFixed(sourceImage, getCellOptions(),
@@ -38,3 +54,4 @@ public Raster getRaster(PImage sourceImage)
   
   return raster;
 }
+*/

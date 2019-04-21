@@ -7,7 +7,7 @@ public abstract class CellShapeTransformer {
 
 
 // Sizes a shape according to darkness with an optional bias value
-// the larger the bias, the more bright a sample has to be to produce a large shape
+// the larger the bias, the more dark a sample has to be to produce a large shape
 public class CellShapeTransformerDarkness extends CellShapeTransformer {
   private float bias;
  
@@ -23,12 +23,12 @@ public class CellShapeTransformerDarkness extends CellShapeTransformer {
   
   public float getWidth(CellSample sample)
   {
-    return pow((1 - sample.avgBrightness) * sample.w, bias);
+    return pow((1 - sample.avgBrightness), bias) * sample.w;
   }
   
   public float getHeight(CellSample sample)
   {
-    return pow((1 - sample.avgBrightness) * sample.h, bias);
+    return pow((1 - sample.avgBrightness), bias) * sample.h;
   }
   
   // Does nothing with position
@@ -61,12 +61,12 @@ public class CellShapeTransformerBrightness extends CellShapeTransformer {
   
   public float getWidth(CellSample sample)
   {
-    return pow(sample.avgBrightness * sample.w, bias);
+    return pow(sample.avgBrightness, bias) * sample.w;
   }
   
   public float getHeight(CellSample sample)
   {
-    return pow(sample.avgBrightness * sample.h, bias);
+    return pow(sample.avgBrightness, bias) * sample.h;
   }
   
   // Does nothing with position

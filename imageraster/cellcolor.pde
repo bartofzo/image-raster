@@ -50,3 +50,12 @@ public class CellColorRandom extends CellColor {
    return color(random(255), random(255), random(255)); 
   }
 }
+
+// CellColorGrayscale fills all shapes with the hue of the avg brightness
+public class CellColorBrightnessHue extends CellColor {
+  public color getColor(CellSample sample)
+  {
+   colorMode(HSB);
+   return color(255 - sample.avgBrightness * 255, 255, 255);
+  }
+}
